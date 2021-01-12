@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +38,7 @@ public class FileController {
 	@PostMapping("/convert")
 	public Object convert(@RequestPart("file") MultipartFile file, @RequestParam String outputPath) throws FileNotFoundException, IOException, CsvException {
 		LOG.info(file.getResource().getFilename());
-		CSVReader csvReader = new CSVReader(new InputStreamReader(file.getInputStream()));
+		CSVReader csvReader = new CSVReader(new InputStreamReader(file.getInputStream(), StandardCharsets.ISO_8859_1));
 		String[] headers = csvReader.readNext();
 
 		int i=1;
